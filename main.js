@@ -12,6 +12,11 @@ function sticky(elements){
 
 			// Set sticky element
 			if(windowTop >= elementRect[i].rect.top && !current.classList.contains("is-sticky")){
+				// Add hidden style for preview sticky element
+				if(i != 0){
+					elementRect[i - 1].element.style.visibility = "hidden";
+				}
+				
 				// Style for sticky
 				current.style.width = elementRect[i].rect.width + "px";
 				current.style.position = "fixed";
@@ -19,14 +24,15 @@ function sticky(elements){
 				current.style.left = elementRect[i].rect.left + "px";
 				current.classList.add("is-sticky");
 				
-				console.log(i);
-				
 				// Temporary placeholder element
 				tempPlaceEl.style.height = elementRect[i].rect.height + "px";
 				tempPlaceEl.style.marginTop = elementRect[i].rect.marginTop;
 				tempPlaceEl.style.marginBottom = elementRect[i].rect.marginBottom;
 				current.parentNode.insertBefore(tempPlaceEl.cloneNode(), current.nextSibling);
 			} else if(windowTop < elementRect[i].rect.top && current.classList.contains("is-sticky")){
+				// Remove hidden style for preview sticky element
+				elementRect[i > 0 ? i - 1 : 0].element.style.visibility = "visible";
+				
 				// Remove sticky element
 				current.removeAttribute("style");
 				current.classList.remove("is-sticky");
