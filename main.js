@@ -19,6 +19,8 @@ function sticky(elements){
 				current.style.left = elementRect[i].rect.left + "px";
 				current.classList.add("is-sticky");
 				
+				console.log(i);
+				
 				// Temporary placeholder element
 				tempPlaceEl.style.height = elementRect[i].rect.height + "px";
 				tempPlaceEl.style.marginTop = elementRect[i].rect.marginTop;
